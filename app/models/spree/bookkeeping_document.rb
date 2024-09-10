@@ -8,6 +8,10 @@ module Spree
       :number
     ]
 
+    def self.ransackable_attributes(auth_object = nil)
+      ["created_at", "email", "firstname", "id", "id_value", "lastname", "number", "printable_id", "printable_type", "template", "total", "updated_at"]
+    end
+
     # Spree::BookkeepingDocument cares about creating PDFs. Whenever it needs to know
     # anything about the document to send to the view, it asks a view object.
     #
@@ -108,7 +112,8 @@ module Spree
     #
     def render_pdf
       ApplicationController.render(
-        template: "#{template_name}.pdf.prawn",
+        template: template_name,
+        formats: [:pdf],
         assigns: { doc: self }
       )
     end

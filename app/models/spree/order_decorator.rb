@@ -42,6 +42,7 @@ module Spree
     end
 
     def invoice_for_order
+      return if bookkeeping_documents.exists?(template: 'invoice') && bookkeeping_documents.exists?(template: 'packaging_slip')
       bookkeeping_documents.create(template: 'invoice')
       bookkeeping_documents.create(template: 'packaging_slip')
     end

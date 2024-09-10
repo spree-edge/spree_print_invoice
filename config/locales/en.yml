@@ -1,6 +1,7 @@
 ---
 en:
   spree:
+    printable_number: Printable Number
     admin:
       tab:
         invoices: Invoices
