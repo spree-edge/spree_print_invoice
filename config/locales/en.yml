@@ -2,6 +2,9 @@
 en:
   spree:
     printable_number: Printable Number
+    bookkeeping_documents: Bookkeeping Documents
+    print_invoice_settings: Print Invoice Settings
+    documents: Documents
     admin:
       tab:
         invoices: Invoices
