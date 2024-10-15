@@ -12,7 +12,7 @@ invoice.items.each do |item|
   row = [
     item.sku,
     item.name,
-    item.options_text,
+    item.options_text.join(','),
     item.display_price.to_s,
     item.quantity,
     item.display_total.to_s
