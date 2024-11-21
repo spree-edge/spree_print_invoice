@@ -8,7 +8,10 @@ module Spree
       def show
         respond_with(@bookkeeping_document) do |format|
           format.pdf do
-            send_data @bookkeeping_document.pdf, type: 'application/pdf', disposition: 'inline'
+            send_data @bookkeeping_document.pdf,
+                      type: 'application/pdf',
+                      disposition: 'inline',
+                      filename: pdf_filename
           end
         end
       end
@@ -38,6 +41,10 @@ module Spree
 
       def load_order
         @order = Spree::Order.find_by(number: params[:order_id])
+      end
+
+      def pdf_filename
+        "#{@bookkeeping_document.template}_#{@bookkeeping_document.number}_#{@bookkeeping_document.printable.bill_address.firstname}_#{@bookkeeping_document.printable.completed_at.to_i}.pdf"
       end
     end
   end

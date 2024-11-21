@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Spree
+module SpreePrintInvoice
   module OrderDecorator
     def self.prepended(base)
       base.has_many :bookkeeping_documents, as: :printable, dependent: :destroy
@@ -42,9 +42,11 @@ module Spree
     end
 
     def invoice_for_order
+      return if bookkeeping_documents.exists?(template: 'invoice') && bookkeeping_documents.exists?(template: 'packaging_slip')
       bookkeeping_documents.create(template: 'invoice')
       bookkeeping_documents.create(template: 'packaging_slip')
     end
   end
 end
-::Spree::Order.prepend Spree::OrderDecorator
+
+::Spree::Order.prepend SpreePrintInvoice::OrderDecorator

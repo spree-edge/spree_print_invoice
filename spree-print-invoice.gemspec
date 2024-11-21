@@ -22,8 +22,8 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_runtime_dependency 'prawn-rails', '~> 1.3'
-  s.add_runtime_dependency 'spree_core', '>= 3.1.0', '< 5.0'
+  s.add_runtime_dependency 'prawn-rails', '~> 1.4.2'
+  s.add_runtime_dependency 'spree_core', '>= 4.8.0', '< 5.0'
   s.add_runtime_dependency 'spree_extension'
 
   s.add_development_dependency 'capybara'
