@@ -1,0 +1,28 @@
+<% if @bookkeeping_documents.any? %>
+  <div class="table-responsive">
+    <table class="table" id="listing_products">
+      <thead class="text-muted">
+        <tr>
+          </th>
+          <th scope="col">
+            <%= sort_link @search, :created_at, Spree.t(:date, scope: :print_invoice) %>
+          </th>
+          <th scope="col"><%= sort_link @search, :template, Spree.t(:document_type, scope: :print_invoice) %></th>
+          <th scope="col" class="text-center">
+            <%= sort_link @search, :number, Spree.t(:order_number, scope: :print_invoice) %>
+          </th>
+          <th scope="col"><%= sort_link @search, :firstname, Spree.t(:firstname, scope: :print_invoice) %></th>
+          <th><%= sort_link @search, :lastname, Spree.t(:lastname, scope: :print_invoice) %></th>
+          <th><%= sort_link @search, :email, Spree.t(:email, scope: :print_invoice) %></th>
+          <th><%= sort_link @search, :total, Spree.t(:total) %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: 'spree/admin/bookkeeping_documents/document', collection: @bookkeeping_documents, cached: spree_base_cache_scope %>
+      </tbody>
+    </table>
+  </div>
+  <%= render partial: 'spree/admin/shared/index_table_options', locals: { collection: @bookkeeping_documents } %>
+<% else %>
+    <%= render 'spree/admin/shared/no_resource_found' %>
+<% end %>

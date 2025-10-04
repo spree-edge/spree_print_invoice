@@ -1,0 +1,11 @@
+<% show_inside_tabs = request.path.include?('bookkeeping_documents')%>
+<% if can?(:manage, Spree::BookkeepingDocument) %>
+  <%= nav_item(Spree.t(:Documents), spree.admin_bookkeeping_documents_path, icon: 'box-seam') %>
+  <% if show_inside_tabs %>
+    <% request_query = request.query_parameters.dig(:q, :template_eq) %>
+    <ul class="ml-4 pl-1 mb-2 nav-submenu mt-1">
+      <%= nav_item(Spree.t(:invoice), spree.admin_bookkeeping_documents_path(q: { template_eq: 'invoice' }), active: request_query == 'invoice') %>
+      <%= nav_item(Spree.t(:packaging_slips), spree.admin_bookkeeping_documents_path(q: { template_eq: 'packaging_slip' }), active: request_query == 'packaging_slip') %>
+    </ul>
+    <% end %>
+<% end %>

@@ -1,6 +1,8 @@
 module Spree
   module Admin
     class BookkeepingDocumentsController < ResourceController
+      respond_to :html, :js
+
       before_action :load_order, if: :order_focused?
 
       helper_method :order_focused?

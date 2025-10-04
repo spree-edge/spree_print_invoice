@@ -1,131 +1,20 @@
+<div class="card-lg">
 <% if order_focused? %>
-  <%= render partial: 'spree/admin/shared/order_tabs', locals: { current: :documents } %>
 
+      <%#= render_admin_partials(:order_page_header_partials, order: @order) %>
   <% content_for :page_actions do %>
     <%= button_link_to(Spree.t(@bookkeeping_documents.any? ? :refresh_documents : :create_documents), spree.refresh_admin_order_bookkeeping_documents_path(@order), { class: "btn-primary", icon: @bookkeeping_documents.any? ? 'refresh' :'add', id: 'refresh-bookkeeping' }) %>
   <% end %>
 
   <% content_for :page_title do %>
+    <%= page_header_back_button spree.edit_admin_order_path(@order) %>
     <%= t(:documents_for_order, scope: [:spree, :print_invoice], order_number: @order.number) %>
   <% end %>
 <% else %>
   <% content_for :page_title do %>
     <%= t(:documents, scope: [:spree, :print_invoice]) %>
   <% end %>
-
-  <% content_for :table_filter do %>
-    <div data-hook="admin_orders_index_search">
-
-      <%= search_form_for [:admin, @search] do |f| %>
-        <%= f.hidden_field :template_type_eq, value: params[:q][:template_type_eq] %>
-        <div class="row">
-          <div class="date-range-filter col-md-8">
-            <div class="form-group">
-              <%= label_tag :q_created_at_gt, Spree.t(:date_range) %>
-              <div class="row no-padding-bottom">
-                <div class="col-md-6">
-                  <div class="input-group">
-                    <%= f.text_field :created_at_gt, class: 'datepicker datepicker-from form-control', value: params[:q][:created_at_gt], placeholder: Spree.t(:start) %>
-                    <span class="input-group-addon">
-                      <i class="icon icon-calendar"></i>
-                    </span>
-                  </div>
-
-                </div>
-                <div class="col-md-6">
-                  <div class="input-group">
-                    <%= f.text_field :created_at_lt, class: 'datepicker datepicker-to form-control', value: params[:q][:created_at_lt], placeholder: Spree.t(:stop) %>
-                    <span class="input-group-addon">
-                      <i class="icon icon-calendar"></i>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="form-group">
-              <%= label_tag :q_number_cont, Spree.t(:printable_number, number: '') %>
-              <%= f.text_field :number_cont, class: 'form-control js-quick-search-target' %>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="row">
-
-          <div class="col-md-4">
-            <div class="form-group">
-              <%= label_tag :q_firstname_start, Spree.t(:first_name_begins_with) %>
-              <%= f.text_field :firstname_start, class: 'form-control' %>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="form-group">
-              <%= label_tag :q_lastname_start, Spree.t(:last_name_begins_with) %>
-              <%= f.text_field :lastname_start, class: 'form-control' %>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="form-group">
-              <%= label_tag :q_email_cont, Spree.t(:email) %>
-              <%= f.text_field :email_cont, class: 'form-control js-filterable' %>
-            </div>
-          </div>
-
-        </div>
-
-        <div data-hook="admin_orders_index_search_buttons" class="form-actions">
-          <%= button Spree.t(:filter_results), 'search' %>
-        </div>
-
-      <% end %>
-    </div>
-
-  <% end %>
-  <%= render partial: 'spree/admin/shared/index_table_options', locals: { collection: @bookkeeping_documents } %>
+  <%= render 'filters' %>
 <% end %>
-
-<% if @bookkeeping_documents.any? %>
-  <table class="table table-responsive-lg" id="listing_orders" data-hook>
-    <thead>
-      <tr data-hook="printables_index_headers">
-        <th><%= sort_link @search, :created_at, Spree.t(:date, scope: :print_invoice) %></th>
-        <th><%= sort_link @search, :template, Spree.t(:document_type, scope: :print_invoice) %></th>
-        <th><%= sort_link @search, :number, Spree.t(:order_number, scope: :print_invoice) %></th>
-        <th><%= sort_link @search, :firstname, Spree.t(:firstname, scope: :print_invoice) %></th>
-        <th><%= sort_link @search, :lastname, Spree.t(:lastname, scope: :print_invoice) %></th>
-        <th><%= sort_link @search, :email, Spree.t(:email, scope: :print_invoice) %></th>
-        <th><%= sort_link @search, :total, Spree.t(:total) %></th>
-        <th data-hook="admin_orders_index_header_actions" class="actions"></th>
-      </tr>
-    </thead>
-    <tbody>
-    <% @bookkeeping_documents.each do |bookkeeping_document| %>
-      <tr data-hook="admin_printables_index_rows" class="<%= cycle('odd', 'even') %>">
-        <td><%= l bookkeeping_document.created_at.to_date %></td>
-        <td><%= Spree.t(bookkeeping_document.document_type, scope: [:print_invoice]) %></td>
-        <td><%= bookkeeping_document.number %></td>
-        <td><%= bookkeeping_document.firstname %></td>
-        <td><%= bookkeeping_document.lastname %></td>
-        <td><%= bookkeeping_document.email %></td>
-        <td><%= bookkeeping_document.display_total.to_html %></td>
-        <td class='actions actions-1' data-hook="admin_orders_index_row_actions">
-          <%= link_to_with_icon "file", "", admin_bookkeeping_document_path(bookkeeping_document, format: :pdf), title: "show_bookkeeping_document_#{bookkeeping_document.id}", no_text: true %>
-        </td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <div class="alert alert-info no-objects-found">
-    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::BookkeepingDocument)) %>,
-  </div>
-<% end %>
-
-<% unless order_focused? %>
-  <%= render partial: 'spree/admin/shared/index_table_options', locals: { collection: @bookkeeping_documents, simple: true } %>
-<% end %>
+  <%= render 'list' %>
+</div>
