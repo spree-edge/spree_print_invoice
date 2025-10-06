@@ -1,7 +1,7 @@
-im = (Rails.application.assets || ::Sprockets::Railtie.build_environment(Rails.application)).find_asset(Spree::PrintInvoice::Config[:logo_path])
+im = (Rails.application.assets || ::Sprockets::Railtie.build_environment(Rails.application)).find_asset(Spree::PrintInvoice::Config[:preferred_logo_path])
 
 if im && File.exist?(im.filename)
-  pdf.image im.filename, vposition: :top, height: 40, scale: Spree::PrintInvoice::Config[:logo_scale]
+  pdf.image im.filename, vposition: :top, height: 40, scale: Spree::PrintInvoice::Config[:preferred_logo_scale]
 end
 
 pdf.grid([0,3], [1,4]).bounding_box do

@@ -54,7 +54,7 @@ module Spree
 
     def number
       if use_sequential_number?
-        Spree::PrintInvoice::Config.next_number
+        Spree::PrintInvoice::Config.preferred_next_number
       else
         printable.number
       end

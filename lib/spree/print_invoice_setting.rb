@@ -1,5 +1,6 @@
 module Spree
-  class PrintInvoiceSetting < Preferences::RuntimeConfiguration
+  class PrintInvoiceSetting < Spree::Preferences::Configuration
+    include Spree::Preferences::Preferable
     preference :next_number,      :integer, default: nil
     preference :logo_path,        :string,  default: 'admin/logo.png'
     preference :page_size,        :string,  default: 'LETTER'
@@ -16,6 +17,10 @@ module Spree
     preference :store_pdf,        :boolean, default: false
     preference :storage_path,     :string,  default: 'tmp/invoice_prints'
 
+    def preferences
+      @preferences ||= Spree::Preferences::ScopedStore.new(self.class.name.underscore)
+    end
+
     def page_sizes
       ::PDF::Core::PageGeometry::SIZES.keys
     end
@@ -25,12 +30,12 @@ module Spree
     end
 
     def use_sequential_number?
-      next_number.present? && next_number > 0
+      preferred_next_number.present? && preferred_next_number > 0
     end
 
     def increase_invoice_number!
-      current_invoice_number = next_number
-      set_preference(:next_number, current_invoice_number + 1)
+      current_invoice_number = preferred_next_number
+      set_preference(:preferred_next_number, current_invoice_number + 1)
     end
 
     def font_faces

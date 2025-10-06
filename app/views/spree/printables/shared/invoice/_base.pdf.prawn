@@ -1,6 +1,6 @@
 font_style = {
-  face: Spree::PrintInvoice::Config[:font_face],
-  size: Spree::PrintInvoice::Config[:font_size]
+  face: Spree::PrintInvoice::Config[:preferred_font_face],
+  size: Spree::PrintInvoice::Config[:preferred_font_size]
 }
 
 prawn_document(force_download: true) do |pdf|
@@ -30,16 +30,16 @@ prawn_document(force_download: true) do |pdf|
 
     pdf.move_down 30
 
-    pdf.text Spree::PrintInvoice::Config[:return_message], align: :right, size: font_style[:size]
+    pdf.text Spree::PrintInvoice::Config[:preferred_return_message], align: :right, size: font_style[:size]
   end
 
   # Footer
-  if Spree::PrintInvoice::Config[:use_footer]
+  if Spree::PrintInvoice::Config[:preferred_use_footer]
     render 'spree/printables/shared/footer', pdf: pdf
   end
 
   # Page Number
-  if Spree::PrintInvoice::Config[:use_page_numbers]
+  if Spree::PrintInvoice::Config[:preferred_use_page_numbers]
     render 'spree/printables/shared/page_number', pdf: pdf
   end
 end

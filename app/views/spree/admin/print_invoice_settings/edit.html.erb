@@ -12,70 +12,70 @@
 
             <div class="form-group">
               <div class="checkbox">
-                <%= label_tag 'preferences[use_footer]' do %>
-                  <%= check_box_tag('preferences[use_footer]', 'true', Spree::PrintInvoice::Config[:use_footer]) %>
+                <%= label_tag 'preferences[preferred_use_footer]' do %>
+                  <%= check_box_tag('preferences[preferred_use_footer]', 'true', Spree::PrintInvoice::Config[:preferred_use_footer]) %>
                   <%= Spree.t(:use_footer, scope: [:print_invoice, :preferences]) %>
                 <% end %>
               </div>
 
               <div class="checkbox">
-                <%= label_tag 'preferences[use_page_numbers]' do %>
-                  <%= check_box_tag('preferences[use_page_numbers]', 'true', Spree::PrintInvoice::Config[:use_page_numbers]) %>
+                <%= label_tag 'preferences[preferred_use_page_numbers]' do %>
+                  <%= check_box_tag('preferences[preferred_use_page_numbers]', 'true', Spree::PrintInvoice::Config[:preferred_use_page_numbers]) %>
                   <%= Spree.t(:use_page_numbers, scope: [:print_invoice, :preferences]) %>
                 <% end %>
               </div>
             </div>
 
             <div class="form-group">
-              <%= label_tag 'preferences[logo_path]', Spree.t(:logo_path, scope: [:print_invoice, :preferences]) %>
-              <%= text_field_tag('preferences[logo_path]', Spree::PrintInvoice::Config[:logo_path], class: 'form-control') %>
+              <%= label_tag 'preferences[preferred_logo_path]', Spree.t(:logo_path, scope: [:print_invoice, :preferences]) %>
+              <%= text_field_tag('preferences[preferred_logo_path]', Spree::PrintInvoice::Config[:preferred_logo_path], class: 'form-control') %>
             </div>
 
             <div class="form-group">
-              <%= label_tag 'preferences[next_number]', Spree.t(:next_number, scope: [:print_invoice, :preferences]) %>
-              <%= number_field_tag('preferences[next_number]', Spree::PrintInvoice::Config[:next_number], class: 'form-control') %>
+              <%= label_tag 'preferences[preferred_next_number]', Spree.t(:next_number, scope: [:print_invoice, :preferences]) %>
+              <%= number_field_tag('preferences[preferred_next_number]', Spree::PrintInvoice::Config[:preferred_next_number], class: 'form-control') %>
             </div>
 
             <div class="form-group">
-              <%= label_tag 'preferences[page_size]', Spree.t(:page_size, scope: [:print_invoice, :preferences]) %>
-              <%= tom_select_tag 'preferences[page_size]', include_blank: true, class: "mb-2 w-100", options: Spree::PrintInvoice::Config.page_sizes.map{ |id| {id: id, name: id}}.as_json, value_field: :id,
-                active_option: Spree::PrintInvoice::Config[:page_size]  %>
+              <%= label_tag 'preferences[preferred_page_size]', Spree.t(:page_size, scope: [:print_invoice, :preferences]) %>
+              <%= tom_select_tag 'preferences[preferred_page_size]', include_blank: true, class: "mb-2 w-100", options: Spree::PrintInvoice::Config.page_sizes.map{ |id| {id: id, name: id}}.as_json, value_field: :id,
+                active_option: Spree::PrintInvoice::Config[:preferred_page_size]  %>
             </div>
 
             <div class="form-group">
-              <%= label_tag 'preferences[page_layout]', Spree.t(:page_layout, scope: [:print_invoice, :preferences]) %>
-              <%= tom_select_tag 'preferences[page_layout]', include_blank: true, class: "mb-2 w-100", options: Spree::PrintInvoice::Config.page_layouts.map{ |id| {id: id, name: id}}.as_json, value_field: :id,
-                active_option: Spree::PrintInvoice::Config[:page_layout]  %>
+              <%= label_tag 'preferences[preferred_page_layout]', Spree.t(:page_layout, scope: [:print_invoice, :preferences]) %>
+              <%= tom_select_tag 'preferences[preferred_page_layout]', include_blank: true, class: "mb-2 w-100", options: Spree::PrintInvoice::Config.page_layouts.map{ |id| {id: id, name: id}}.as_json, value_field: :id,
+                active_option: Spree::PrintInvoice::Config[:preferred_page_layout]  %>
             </div>
 
             <div class="form-group">
-              <%= label_tag 'preferences[font_face]', Spree.t(:font_face, scope: [:print_invoice, :preferences]) %>
-              <%= tom_select_tag 'preferences[font_face]', include_blank: true, class: "mb-2 w-100", options: Spree::PrintInvoice::Config.font_faces.map{ |id| {id: id, name: id}}.as_json, value_field: :id,
-                              active_option: Spree::PrintInvoice::Config[:font_face]  %>
+              <%= label_tag 'preferences[preferred_font_face]', Spree.t(:font_face, scope: [:print_invoice, :preferences]) %>
+              <%= tom_select_tag 'preferences[preferred_font_face]', include_blank: true, class: "mb-2 w-100", options: Spree::PrintInvoice::Config.font_faces.map{ |id| {id: id, name: id}}.as_json, value_field: :id,
+                              active_option: Spree::PrintInvoice::Config[:preferred_font_face]  %>
             </div>
 
             <div class="form-group">
-              <%= label_tag 'preferences[font_size]', Spree.t(:font_size, scope: [:print_invoice, :preferences]) %>
-              <%= tom_select_tag 'preferences[font_size]', include_blank: true, class: "mb-2 w-100", options: Spree::PrintInvoice::Config.font_sizes.map{ |id| {id: id, name: id}}.as_json, value_field: :id, active_option: Spree::PrintInvoice::Config[:font_size]  %>
+              <%= label_tag 'preferences[preferred_font_size]', Spree.t(:font_size, scope: [:print_invoice, :preferences]) %>
+              <%= tom_select_tag 'preferences[preferred_font_size]', include_blank: true, class: "mb-2 w-100", options: Spree::PrintInvoice::Config.font_sizes.map{ |id| {id: id, name: id}}.as_json, value_field: :id, active_option: Spree::PrintInvoice::Config[:preferred_font_size]  %>
             </div>
 
             <div class="form-group">
-              <%= label_tag 'preferences[logo_scale]', Spree.t(:logo_scale, scope: [:print_invoice, :preferences]) %>
-              <%= number_field_tag('preferences[logo_scale]', Spree::PrintInvoice::Config[:logo_scale], in: 1...101, class: 'form-control') %>
+              <%= label_tag 'preferences[preferred_logo_scale]', Spree.t(:logo_scale, scope: [:print_invoice, :preferences]) %>
+              <%= number_field_tag('preferences[preferred_logo_scale]', Spree::PrintInvoice::Config[:preferred_logo_scale], in: 1...101, class: 'form-control') %>
             </div>
 
             <div class="form-group">
               <div class="checkbox">
-                <%= label_tag 'preferences[store_pdf]' do %>
-                  <%= check_box_tag('preferences[store_pdf]', 'true', Spree::PrintInvoice::Config[:store_pdf]) %>
+                <%= label_tag 'preferences[preferred_store_pdf]' do %>
+                  <%= check_box_tag('preferences[preferred_store_pdf]', 'true', Spree::PrintInvoice::Config[:preferred_store_pdf]) %>
                   <%= Spree.t(:store_pdf, scope: [:print_invoice, :preferences]) %>
                 <% end %>
               </div>
             </div>
 
             <div class="form-group">
-              <%= label_tag 'preferences[storage_path]', Spree.t(:storage_path, scope: [:print_invoice, :preferences]) %>
-              <%= text_field_tag('preferences[storage_path]', Spree::PrintInvoice::Config[:storage_path], class: 'form-control', disabled: !Spree::PrintInvoice::Config[:store_pdf]) %>
+              <%= label_tag 'preferences[preferred_storage_path]', Spree.t(:storage_path, scope: [:print_invoice, :preferences]) %>
+              <%= text_field_tag('preferences[preferred_storage_path]', Spree::PrintInvoice::Config[:preferred_storage_path], class: 'form-control', disabled: !Spree::PrintInvoice::Config[:preferred_store_pdf]) %>
             </div>
           </fieldset>
         </div>
@@ -85,25 +85,25 @@
             <legend><%= Spree.t(:invoice_slip_legend, scope: :print_invoice) %></legend>
 
             <div class="form-group">
-              <%= label_tag 'preferences[footer_left]', Spree.t(:footer_left, scope: [:print_invoice, :preferences]) %>
-              <%= text_area_tag('preferences[footer_left]', Spree::PrintInvoice::Config[:footer_left], rows: 5, class: 'form-control') %>
+              <%= label_tag 'preferences[preferred_footer_left]', Spree.t(:footer_left, scope: [:print_invoice, :preferences]) %>
+              <%= text_area_tag('preferences[preferred_footer_left]', Spree::PrintInvoice::Config[:preferred_footer_left], rows: 5, class: 'form-control') %>
               <%= content_tag(:span, Spree.t(:footer_left_info, scope: [:print_invoice, :preferences]), class: 'info') %>
             </div>
 
             <div class="form-group">
-              <%= label_tag 'preferences[footer_right]', Spree.t(:footer_right, scope: [:print_invoice, :preferences]) %>
-              <%= text_area_tag('preferences[footer_right]', Spree::PrintInvoice::Config[:footer_right], rows: 5, class: 'form-control') %>
+              <%= label_tag 'preferences[preferred_footer_right]', Spree.t(:footer_right, scope: [:print_invoice, :preferences]) %>
+              <%= text_area_tag('preferences[preferred_footer_right]', Spree::PrintInvoice::Config[:preferred_footer_right], rows: 5, class: 'form-control') %>
               <%= content_tag(:span, Spree.t(:footer_right_info, scope: [:print_invoice, :preferences]), class: 'info') %>
             </div>
 
             <div class="form-group">
-              <%= label_tag 'preferences[return_message]', Spree.t(:return_message, scope: [:print_invoice, :preferences]) %>
-              <%= text_area_tag('preferences[return_message]', Spree::PrintInvoice::Config[:return_message], rows: 6, class: 'form-control') %>
+              <%= label_tag 'preferences[preferred_return_message]', Spree.t(:return_message, scope: [:print_invoice, :preferences]) %>
+              <%= text_area_tag('preferences[preferred_return_message]', Spree::PrintInvoice::Config[:preferred_return_message], rows: 6, class: 'form-control') %>
             </div>
 
             <div class="form-group">
-              <%= label_tag 'preferences[anomaly_message]', Spree.t(:anomaly_message, scope: [:print_invoice, :preferences]) %>
-              <%= text_area_tag('preferences[anomaly_message]', Spree::PrintInvoice::Config[:anomaly_message], rows: 6, class: 'form-control') %>
+              <%= label_tag 'preferences[preferred_anomaly_message]', Spree.t(:anomaly_message, scope: [:print_invoice, :preferences]) %>
+              <%= text_area_tag('preferences[preferred_anomaly_message]', Spree::PrintInvoice::Config[:preferred_anomaly_message], rows: 6, class: 'form-control') %>
             </div>
           </fieldset>
         </div>
